@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>jQuery roundSlider - JS Bin</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/roundSlider/1.3.2/roundslider.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/roundSlider/1.3.2/roundslider.min.js"></script>
+</head>
+<body>
+  <!-- Only html needed   -->
+  <input type = "button" id = "button1" value = "Click Here" />
+  <div id="slider1"></div>
+  <div id="slider2"></div>
+   
+  <script>
+    var val;
+    $("#slider1").roundSlider({
+	radius: 85,
+	sliderType: "min-range",
+	drag: function (event, ui) {
+            console.log(this.getValue());
+            var obj2 = $("#slider1").data("roundSlider");
+
+            val = obj2.getValue();
+            value: 1
+            $.getJSON('/dragvalue', {
+		drag_val: val
+            });
+        },
+	change: function () {
+            var obj1 = $("#slider1").data("roundSlider");
+
+            val = obj1.getValue();
+            value: 1
+            $.getJSON('/valueofslider', {
+		slide_val: val
+            });
+	}
+    });
+    $("#slider2").roundSlider({
+	radius: 85,
+	sliderType: "min-range",
+	drag: function (event, ui) {
+            console.log(this.getValue());
+            var obj2 = $("#slider2").data("roundSlider");
+
+            val = obj2.getValue();
+            value: 1
+            $.getJSON('/dragvalue2', {
+		drag_val: val
+            });
+        },
+	change: function () {
+            var obj1 = $("#slider2").data("roundSlider");
+
+            val = obj1.getValue();
+            value: 1
+            $.getJSON('/valueofslider2', {
+		slide_val: val
+            });
+	}
+    });
+  </script>
+  <script type=text/javascript>
+    $(function() {
+	$("#button1").click(function (event) {
+	    $.getJSON('/SomeFunction',
+		      { },
+		      function(data) { });
+	    return false;
+	});
+    });
+  </script> 
+
+</body>
+</html>
